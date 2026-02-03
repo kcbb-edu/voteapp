@@ -141,3 +141,13 @@ socket.on('reset', (message) => {
     localStorage.removeItem('sessionCode');
     location.reload();
 });
+
+socket.on('resetVote', (message) => {
+    isScored = false;
+    showConfirmMsg(''); // Clear any "Scored" message
+    $('.scoreBtnWrapper').show(); // Ensure buttons are visible
+    // Maybe show a quick toast
+    let toast = $('<div style="position:fixed;top:10%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:white;padding:10px 20px;border-radius:20px;z-index:999;">投票已重置 (Vote Reset)</div>');
+    $('body').append(toast);
+    setTimeout(() => toast.fadeOut(() => toast.remove()), 2000);
+});

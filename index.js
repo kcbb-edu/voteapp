@@ -67,7 +67,14 @@ io.on('connection', (socket) => {
         io.emit('sessionCode', sessionCode);
         
         io.emit('reset', message);
-        console.log('System Reset. New Code: ' + sessionCode);
+        console.log('System Reset (Room). New Code: ' + sessionCode);
+    });
+
+    socket.on('resetVote', (message) => {
+        scoredUsers = [];
+        // DO NOT change code
+        io.emit('resetVote', message);
+        console.log('System Reset (Vote Only). Code remains: ' + sessionCode);
     });
 
     socket.on('authUser', (data, confirmation) => {

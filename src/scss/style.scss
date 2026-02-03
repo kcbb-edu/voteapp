@@ -99,8 +99,15 @@ body {
 }
 
 .scoreBtnWrapper {
-    display: flex; // flex-wrap: wrap;
-    justify-content: center;
+    height: 100%;
+    // display managed by JS (flex or none)
+    
+    .buttonsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .scoreBtn {
         width: 100px;
         height: 100px;

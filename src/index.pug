@@ -15,13 +15,14 @@ html(lang="zh-HK")
                     .loginWrapper(style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;")
                         input.sessionCodeInput(type="number", placeholder="輸入房號 (Code)", style="font-size: 1.5em; padding: 10px; width: 60%; text-align: center; margin-bottom: 10px; border: 2px solid #ddd; border-radius: 5px;")
                         .btnJoin(style="font-size: 1.2em; padding: 10px 30px; background: #3CD1A9; color: white; border-radius: 5px; cursor: pointer;") 加入 (Join)
-                    .scoreBtnWrapper(style="display: none;")
-                        .currentRoomInfo(style="width: 100%; text-align: center; margin-bottom: 10px; color: #888;") Room: <span class="roomCodeDisplay">--</span>
-                        .scoreBtn(data-score="1") 1
-                        .scoreBtn(data-score="2") 2
-                        .scoreBtn(data-score="3") 3
-                        .scoreBtn(data-score="4") 4
-                        .scoreBtn(data-score="5") 5
+                    .scoreBtnWrapper(style="display: none; flex-direction: column; align-items: center;")
+                        .currentRoomInfo(style="width: 100%; text-align: center; margin-bottom: 20px; color: #888; font-size: 1.2em;") Room: <span class="roomCodeDisplay">--</span>
+                        .buttonsContainer(style="display: flex; flex-wrap: wrap; justify-content: center;")
+                            .scoreBtn(data-score="1") 1
+                            .scoreBtn(data-score="2") 2
+                            .scoreBtn(data-score="3") 3
+                            .scoreBtn(data-score="4") 4
+                            .scoreBtn(data-score="5") 5
                     .confirmWrapper
                         .confirmMsg 載入中...
             .statusFrame

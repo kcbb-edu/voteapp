@@ -40,8 +40,20 @@ $(document).ready(() => {
         resetDisplay();
     });
 
+    socket.on('resetVote', () => {
+        resetDisplay();
+    });
+
     $('.btnReset').on('click', () => {
-        socket.emit('reset', 'reset');
+        if(confirm('確定要重置房間碼嗎？所有用戶將被踢出。(Reset Room Code?)')) {
+            socket.emit('reset', 'reset');
+        }
+    });
+
+    $('.btnResetVote').on('click', () => {
+        if(confirm('確定要重置投票嗎？用戶無需重新登入。(Reset Votes Only?)')) {
+            socket.emit('resetVote', 'resetVote');
+        }
     });
 
     $('.pin').on('keyup', (event) => {
