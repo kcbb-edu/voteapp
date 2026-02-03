@@ -79,13 +79,28 @@ $(document).ready(() => {
     socket.on('reset', () => {
         resetDisplay();
     });
+
+    socket.on('resetVote', () => {
+        // Reset Logic Same as Hard Reset for Display
+        resetDisplay();
+    });
 });
 
 function updateScore(scoreArray, newScore) {
-    scoreArray.push(newScore);
-    // https://codeburst.io/javascript-arrays-finding-the-minimum-maximum-sum-average-values-f02f1b0ce332
-    var average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
-    return average(scoreArray).toFixed(1);
+    // Ensure newScore is a number
+    let numericScore = parseFloat(newScore);
+    if (isNaN(numericScore)) {
+        console.error("Invalid score received:", newScore);
+        return (scoreArray.length > 0) ? (scoreArray.reduce((p, c) => p + c, 0) / scoreArray.length).toFixed(1) : 0;
+    }
+    
+    scoreArray.push(numericScore);
+    
+    // Calculate average securely
+    var total = scoreArray.reduce((p, c) => p + parseFloat(c), 0);
+    var average = total / scoreArray.length;
+    
+    return average.toFixed(1);
 }
 
 function showStatusMessage(className) {
