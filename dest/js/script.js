@@ -13,16 +13,27 @@ $('.scoreBtn').on('click', (event) => {
     showConfirmMsg('發送中...');
     console.log('OnClick: ' + $(event.target).data('score'));
 
+    const code = $('.sessionCodeInput').val();
+    if (!code) {
+        showConfirmMsg('請輸入房號', 0);
+        setTimeout(() => showConfirmMsg(' '), 2000);
+        return;
+    }
+
     socket.emit('authUser', { 'withData': true, 'socreClicked': $(event.target).data('score')}, (confirmation) =>{
         console.log(confirmation);
         
         if (!isScored) {        
-            socket.emit('score', { userId: randomId, score: $(event.target).data('score') }, (confirmation) => {
+            socket.emit('score', { userId: randomId, score: $(event.target).data('score'), code: code }, (confirmation) => {
                 showConfirmMsg(confirmation, 0);
-                if (!confirmation) {
-                    localStorage.removeItem('userId');
+                if (confirmation.includes('Error')) {
+                   // Don't disable if error
+                } else {
+                   if (!confirmation) {
+                       localStorage.removeItem('userId');
+                   }
+                   isScored = true;
                 }
-                isScored = true;
             });
             
         }

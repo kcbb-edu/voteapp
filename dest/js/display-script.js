@@ -60,6 +60,10 @@ $(document).ready(() => {
         $('.statusConnectedUser').html('已連線用戶: ' + message);
     });
 
+    socket.on('sessionCode', (code) => {
+        $('.sessionCode').html('Room Code: ' + code);
+    });
+
     socket.on('connect', () => {
         showStatusMessage('statusMsgConnected');
     });

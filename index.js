@@ -12,6 +12,8 @@ const app = express(),
     io = socketio(httpServer);
 
 let scoredUsers = [];
+// Generate a random 4-digit numeric string
+let sessionCode = Math.floor(1000 + Math.random() * 9000).toString();
 
 app.use(express.static('dest'));
 
@@ -37,7 +39,14 @@ io.on('connection', (socket) => {
         console.log('A user disconnected: ' + socket.id);
     });
 
+    // Send session code to display/admin
+    socket.emit('sessionCode', sessionCode);
+
     socket.on('score', (data, confirmation) => {
+        if (data.code !== sessionCode) {
+            confirmation('Error: Incorrect Code');
+            return;
+        }
         scoredUsers.push(data.userId)
         io.emit('pushScore', data.score);
         confirmation('Scored: ' + data.score);
@@ -45,6 +54,10 @@ io.on('connection', (socket) => {
 
     socket.on('reset', (message) => {
         scoredUsers = [];
+        // Optional: Regenerate code on reset? 
+        // Let's keep it simple and stable for now.
+        // sessionCode = Math.floor(1000 + Math.random() * 9000).toString();
+        // io.emit('sessionCode', sessionCode);
         io.emit('reset', message);
         console.log('System Reset');
     });
