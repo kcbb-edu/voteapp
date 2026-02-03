@@ -42,6 +42,14 @@ io.on('connection', (socket) => {
     // Send session code to display/admin
     socket.emit('sessionCode', sessionCode);
 
+    socket.on('checkCode', (code, confirmation) => {
+         if (code === sessionCode) {
+             confirmation(true);
+         } else {
+             confirmation(false);
+         }
+    });
+
     socket.on('score', (data, confirmation) => {
         if (data.code !== sessionCode) {
             confirmation('Error: Incorrect Code');

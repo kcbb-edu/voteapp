@@ -14,10 +14,12 @@
       </div>
       <div class="contentFrame">
         <div class="contentWrapper">
-          <div class="inputWrapper" style="text-align: center; margin-bottom: 20px;">
-            <input class="sessionCodeInput" type="number" placeholder="輸入房號 (Code)" style="font-size: 1.5em; padding: 10px; width: 80%; text-align: center;"/>
+          <div class="loginWrapper" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <input class="sessionCodeInput" type="number" placeholder="輸入房號 (Code)" style="font-size: 1.5em; padding: 10px; width: 60%; text-align: center; margin-bottom: 10px; border: 2px solid #ddd; border-radius: 5px;"/>
+            <div class="btnJoin" style="font-size: 1.2em; padding: 10px 30px; background: #3CD1A9; color: white; border-radius: 5px; cursor: pointer;">加入 (Join)</div>
           </div>
-          <div class="scoreBtnWrapper">
+          <div class="scoreBtnWrapper" style="display: none;">
+            <div class="currentRoomInfo" style="width: 100%; text-align: center; margin-bottom: 10px; color: #888;">Room: <span class="roomCodeDisplay">--</span></div>
             <div class="scoreBtn" data-score="1">1</div>
             <div class="scoreBtn" data-score="2">2</div>
             <div class="scoreBtn" data-score="3">3</div>
