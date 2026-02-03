@@ -43,7 +43,13 @@ function showLogin() {
 function showVoting(code) {
     $('.loginWrapper').hide();
     $('.scoreBtnWrapper').show();
+    $('.scoreBtn').show(); // Ensure buttons are shown
     $('.roomCodeDisplay').text(code);
+}
+
+function showVotedState(score) {
+    $('.scoreBtn').hide();
+    showConfirmMsg('已評分 (Voted): ' + score);
 }
 
 function joinSession(code, silent = false) {
@@ -60,6 +66,13 @@ function joinSession(code, silent = false) {
              localStorage.setItem('sessionCode', code);
              showVoting(code);
              if(!silent) showConfirmMsg(''); 
+             
+             // Check if already voted in this session
+             const lastVotedCode = localStorage.getItem('lastVotedCode');
+             if (lastVotedCode === code) {
+                 const lastScore = localStorage.getItem('lastScore') || '';
+                 showVotedState(lastScore);
+             }
          } else {
              localStorage.removeItem('sessionCode');
              showLogin();
@@ -106,18 +119,30 @@ $('.scoreBtn').on('click', (event) => {
 
     socket.emit('authUser', { 'withData': true, 'socreClicked': $(event.target).data('score')}, (confirmation) =>{
         
-        socket.emit('score', { userId: randomId, score: $(event.target).data('score'), code: code }, (confirmation) => {
+        const scoreVal = $(event.target).data('score');
+        
+        socket.emit('score', { userId: randomId, score: scoreVal, code: code }, (confirmation) => {
             if (confirmation && confirmation.includes('Error')) {
-                   showConfirmMsg('房號無效，請重新加入', 0);
-                   localStorage.removeItem('sessionCode');
-                   setTimeout(() => {
-                        showLogin();
-                        $('.sessionCodeInput').val('');
-                        showConfirmMsg('');
-                   }, 1500);
+                   if (confirmation.includes('voted')) {
+                       // Already voted
+                       showVotedState(localStorage.getItem('lastScore') || scoreVal);
+                       localStorage.setItem('lastVotedCode', code);
+                   } else {
+                       // Wrong code or other error
+                       showConfirmMsg('房號無效，請重新加入', 0);
+                       localStorage.removeItem('sessionCode');
+                       setTimeout(() => {
+                            showLogin();
+                            $('.sessionCodeInput').val('');
+                            showConfirmMsg('');
+                       }, 1500);
+                   }
             } else {
-                   showConfirmMsg(confirmation, 0);
+                   // Success
                    isScored = true;
+                   localStorage.setItem('lastVotedCode', code);
+                   localStorage.setItem('lastScore', scoreVal);
+                   showVotedState(scoreVal);
             }
         });
     });
@@ -139,13 +164,23 @@ socket.on('pushScore', (message) => {
 
 socket.on('reset', (message) => {
     localStorage.removeItem('sessionCode');
+    localStorage.removeItem('lastVotedCode');
+    localStorage.removeItem('lastScore');
     location.reload();
 });
 
 socket.on('resetVote', (message) => {
     isScored = false;
+    localStorage.removeItem('lastVotedCode');
+    localStorage.removeItem('lastScore');
+    
     showConfirmMsg(''); // Clear any "Scored" message
-    $('.scoreBtnWrapper').show(); // Ensure buttons are visible
+    
+    // Explicitly show everything again
+    $('.loginWrapper').hide();
+    $('.scoreBtnWrapper').show();
+    $('.scoreBtn').show(); // Show buttons again
+    
     // Maybe show a quick toast
     let toast = $('<div style="position:fixed;top:10%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:white;padding:10px 20px;border-radius:20px;z-index:999;">投票已重置 (Vote Reset)</div>');
     $('body').append(toast);

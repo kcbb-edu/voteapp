@@ -55,9 +55,13 @@ io.on('connection', (socket) => {
             confirmation('Error: Incorrect Code');
             return;
         }
+        if (scoredUsers.includes(data.userId)) {
+            confirmation('Error: You have already voted!');
+            return;
+        }
         scoredUsers.push(data.userId)
         io.emit('pushScore', data.score);
-        confirmation('Scored: ' + data.score);
+        confirmation('已評分 (' + data.score + ')');
     });
 
     socket.on('reset', (message) => {
