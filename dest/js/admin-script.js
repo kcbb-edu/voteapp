@@ -56,6 +56,20 @@ $(document).ready(() => {
         }
     });
 
+    // Keep Alive Mechanism for Render.com
+    setInterval(() => {
+        // Send a simple ping via socket to keep connection active
+        // This prevents the socket from closing due to inactivity
+        // and generates network traffic.
+        socket.emit('keepAlive', { timestamp: Date.now() });
+        console.log('Sent heartbeat to server');
+    }, 60000); // Every 1 minute
+
+    // Optional: make a fetch request relative to root to keep HTTP active
+    setInterval(() => {
+        fetch('/keep-alive').catch(() => {}); 
+    }, 240000); // 4 minutes
+
     $('.pin').on('keyup', (event) => {
         if ($(event.target).val().hashCode() == 1515237) {
             $(".passcode").remove();
