@@ -118,6 +118,14 @@ $(document).ready(() => {
     }
 });
 
+$('.sessionCodeInput').on('input', function() {
+    const code = $(this).val().toString();
+    if (code.length === 4) {
+        joinSession(code);
+        $(this).blur();
+    }
+});
+
 $('.btnJoin').on('click', () => {
     const code = $('.sessionCodeInput').val();
     joinSession(code);
@@ -125,7 +133,9 @@ $('.btnJoin').on('click', () => {
 
 $('.scoreBtn').on('click', (event) => {
 
-    if (!localStorage.getItem('userId')) {
+    // Ensure we have a persistent User ID
+    randomId = localStorage.getItem('userId');
+    if (!randomId) {
         randomId = rand();
         localStorage.setItem('userId', randomId);
     }
