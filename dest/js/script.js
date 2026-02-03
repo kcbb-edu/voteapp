@@ -3,6 +3,14 @@ let scoredUsers = [],
     isScored = false,
     randomId;
 
+// Load saved code
+$(document).ready(() => {
+    const savedCode = localStorage.getItem('sessionCode');
+    if (savedCode) {
+        $('.sessionCodeInput').val(savedCode);
+    }
+});
+
 $('.scoreBtn').on('click', (event) => {
 
     if (!localStorage.getItem('userId')) {
@@ -29,6 +37,8 @@ $('.scoreBtn').on('click', (event) => {
                 if (confirmation.includes('Error')) {
                    // Don't disable if error
                 } else {
+                   // Success
+                   localStorage.setItem('sessionCode', code);
                    if (!confirmation) {
                        localStorage.removeItem('userId');
                    }

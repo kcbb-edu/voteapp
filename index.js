@@ -54,12 +54,12 @@ io.on('connection', (socket) => {
 
     socket.on('reset', (message) => {
         scoredUsers = [];
-        // Optional: Regenerate code on reset? 
-        // Let's keep it simple and stable for now.
-        // sessionCode = Math.floor(1000 + Math.random() * 9000).toString();
-        // io.emit('sessionCode', sessionCode);
+        // Regenerate code on reset
+        sessionCode = Math.floor(1000 + Math.random() * 9000).toString();
+        io.emit('sessionCode', sessionCode);
+        
         io.emit('reset', message);
-        console.log('System Reset');
+        console.log('System Reset. New Code: ' + sessionCode);
     });
 
     socket.on('authUser', (data, confirmation) => {
