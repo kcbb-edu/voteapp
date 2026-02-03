@@ -43,6 +43,14 @@ $(document).ready(() => {
         console.log('displayScore: ' + displayScore);
         // $('.score').html(displayScore);
         numAnim.update(displayScore);
+
+        // Flash Animation
+        const scoreElement = $('.score');
+        scoreElement.addClass('flash-animation');
+        setTimeout(() => {
+            scoreElement.removeClass('flash-animation');
+        }, 500);
+
         myChart.data.datasets[0].data[0] = displayScore;
         myChart.update();
         $('.votedCount').html('已投票人數: ' + currentScore.length);
