@@ -78,10 +78,16 @@ $(document).ready(() => {
 });
 
 function updateScore(scoreArray, newScore) {
-    scoreArray.push(newScore);
-    // https://codeburst.io/javascript-arrays-finding-the-minimum-maximum-sum-average-values-f02f1b0ce332
-    var average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
-    return average(scoreArray).toFixed(1);
+    // Exact same logic as display-script.js to fix type issues
+    let numericScore = parseFloat(newScore);
+    if (isNaN(numericScore)) {
+        return (scoreArray.length > 0) ? (scoreArray.reduce((p, c) => p + parseFloat(c), 0) / scoreArray.length).toFixed(1) : 0;
+    }
+    
+    scoreArray.push(numericScore);
+    var total = scoreArray.reduce((p, c) => p + parseFloat(c), 0);
+    var average = total / scoreArray.length;
+    return average.toFixed(1);
 }
 
 function showStatusMessage(className) {

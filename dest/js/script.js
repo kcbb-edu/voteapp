@@ -85,6 +85,26 @@ function joinSession(code, silent = false) {
 }
 
 $(document).ready(() => {
+    // Cross-Tab Synchronization
+    // Listen for storage changes from OTHER tabs
+    window.addEventListener('storage', (e) => {
+       if (e.key === 'lastScore' && e.newValue) {
+           // Another tab voted
+           const storedCode = localStorage.getItem('lastVotedCode');
+           const currentCode = localStorage.getItem('sessionCode');
+           
+           if (storedCode && storedCode === currentCode) {
+                isScored = true;
+                showVotedState(e.newValue);
+           }
+       }
+       if (e.key === 'sessionCode' && !e.newValue) {
+           // Another tab logged out / reset
+           localStorage.removeItem('sessionCode');
+           showLogin();
+       }
+    });
+
     // Check if we have a saved code
     const savedCode = localStorage.getItem('sessionCode');
     if (savedCode) {
