@@ -65,7 +65,10 @@ function joinSession(code, silent = false) {
          if (isValid) {
              localStorage.setItem('sessionCode', code);
              showVoting(code);
-             if(!silent) showConfirmMsg(''); 
+             
+             // Always clear loading message on success, even if silent
+             // This removes the "載入中..." overlay on page refresh
+             showConfirmMsg(''); 
              
              // Check if already voted in this session
              const lastVotedCode = localStorage.getItem('lastVotedCode');
