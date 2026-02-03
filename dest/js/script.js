@@ -24,14 +24,19 @@ function showConfirmMsg(msg, shakeVal) {
     if (shakeVal >= 0 && $.fn.effect) {
         $('.confirmWrapper').effect('shake', { times: 2, distance: 5 }, 500);
     }
-    $('.confirmMsg').text(msg).fadeIn();
+    
+    if (!msg || msg.trim() === "") {
+        $('.confirmMsg').fadeOut();
+    } else {
+        $('.confirmMsg').text(msg).fadeIn();
+    }
 }
 
 // Logic to switch UI
 function showLogin() {
     $('.loginWrapper').css('display', 'flex'); // Flex for centering
     $('.scoreBtnWrapper').hide();
-    $('.confirmMsg').text('');
+    showConfirmMsg('');
 }
 
 function showVoting(code) {
@@ -44,7 +49,7 @@ function joinSession(code, silent = false) {
     if(!code) {
         if(!silent) {
             showConfirmMsg('請輸入房號', 0);
-            setTimeout(() => showConfirmMsg(' '), 2000);
+            setTimeout(() => showConfirmMsg(''), 2000);
         }
         return;
     }
@@ -53,13 +58,13 @@ function joinSession(code, silent = false) {
          if (isValid) {
              localStorage.setItem('sessionCode', code);
              showVoting(code);
-             if(!silent) $('.confirmMsg').text(" "); 
+             if(!silent) showConfirmMsg(''); 
          } else {
              localStorage.removeItem('sessionCode');
              showLogin();
              if(!silent) {
                  showConfirmMsg('房號錯誤 (Wrong Code)', 0);
-                 setTimeout(() => showConfirmMsg(' '), 2000);
+                 setTimeout(() => showConfirmMsg(''), 2000);
              }
          }
     });
