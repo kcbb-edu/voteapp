@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>VoteApp - Admin</title>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+    <div class="mainGrid">
+      <div class="scoreGrid">
+        <div class="score">0.0</div>
+      </div>
+      <div class="utilityGrid">
+        <div class="btnReset">Reset</div>
+        <div class="statusConnectedUser">Connected Users: --</div>
+        <div class="votedCount">Voted Count: --</div>
+        <div class="statusFrame">
+          <div class="statusMsgConnecting">Connecting...</div>
+          <div class="statusMsgConnected">Connected</div>
+          <div class="statusMsgDisconnected">Disconnected</div>
+        </div>
+      </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/countUp.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html(lang="zh-HK")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title 投票 App - 管理員
+        link(rel="stylesheet", href="css/admin-style.css")
+    body
+        div.mainFrame
+            .scoreFrame
+                .score 0.0
+            .utilityFrame
+                .btnReset 重置
+                .statusConnectedUser 已連線用戶: --
+                .votedCount 已投票人數: --
+                .statusFrame
+                    .statusMsgConnecting 連線中...
+                    .statusMsgConnected 已連線
+                    .statusMsgDisconnected 已斷線
+        .passcode
+            p 管理員
+            input.pin(type="password")
+        script(src="socket.io/socket.io.js")
+        script(src="js/jquery.js")
+        script(src="js/countUp.js")
+        script(src="js/admin-script.js")

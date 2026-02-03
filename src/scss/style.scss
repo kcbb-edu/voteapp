@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700');
+@import url('normalize.css');
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #F8F8F8;
+}
+
+// Client
+.mainFrame {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    .titleFrame {
+        height: 60px;
+        display: flex;
+        flex: 1 0 auto;
+        justify-content: center;
+        align-items: center;
+        h1 {
+            color: rgb(17, 124, 201);
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 38px;
+            
+        }
+    }
+    .contentFrame {
+        display: flex;
+        flex: 3 1 auto;
+        justify-content: center;
+        align-items: center;
+        .contentWrapper {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            &>div {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.mainFrame > .statusFrame {
+    height: 80px;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+    /* CSS specific to iOS devices */
+    .mainFrame > .statusFrame {
+        height: 180px;
+    }
+}
+
+// Status Frame for both Client & Display
+.statusFrame {
+    height: 48px;
+    flex: 0 0 auto;
+    &>div {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 48px;
+        display: none;
+    }
+    .statusMsgConnecting {
+        background: #fff6ee;
+        color: #faa05a;
+    }
+    .statusMsgConnected {
+        background: #edfbf6;
+        color: #32d296;
+    }
+    .statusMsgDisconnected {
+        background: #fef4f6;
+        color: #f0506e;
+    }
+}
+
+.confirmWrapper {
+    position: absolute;
+    top: 0;
+    margin: 5px;
+    .confirmMsg {
+        width: calc(100% - 10px);
+        height: 100px;
+        line-height: 100px;
+        background-color: rgba(0, 0, 0, 0.6);
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        border-radius: 5px;
+    }
+}
+
+.scoreBtnWrapper {
+    display: flex; // flex-wrap: wrap;
+    justify-content: center;
+    .scoreBtn {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin: 5px;
+        flex: 0 1 auto;
+        text-align: center;
+        font-size: 42px;
+        font-weight: 600;
+        color: #FFFFFF;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.20);
+        &[data-score="1"] {
+            background-image: linear-gradient(-135deg, #E0FFFB 0%, #3CD1A9 100%);
+            box-shadow: 0 6px 12px 0 rgba(80, 227, 194, 0.20);
+            border-radius: 5px;
+        }
+        &[data-score="2"] {
+            background-image: linear-gradient(-135deg, #C3EEFF 0%, #179FFF 100%);
+            box-shadow: 0 6px 12px 0 rgba(49, 143, 242, 0.20);
+            border-radius: 5px;
+        }
+        &[data-score="3"] {
+            background-image: linear-gradient(-134deg, #CAB7FF 0%, #2C85FF 100%);
+            box-shadow: 0 6px 12px 0 rgba(144, 19, 254, 0.20);
+            border-radius: 5px;
+        }
+        &[data-score="4"] {
+            background-image: linear-gradient(-134deg, #EDA6FF 0%, #B10FFF 100%);
+            box-shadow: 0 6px 12px 0 rgba(189, 16, 224, 0.20);
+            border-radius: 5px;
+        }
+        &[data-score="5"] {
+            background-image: linear-gradient(-135deg, #F9A4FF 0%, #FF0063 100%);
+            box-shadow: 0 6px 12px 0 rgba(208, 2, 27, 0.20);
+            border-radius: 5px;
+        }
+    }
+}
+
+// Display
+.mainGrid {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 1fr 130px;
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    
+    .scoreGrid {
+        grid-column: 1 / 2;
+        grid-row: 1;
+        display: flex;
+        .score {
+            margin: auto;
+            font-size: 300px;
+            font-weight: 700;
+            text-align: center;
+        }
+    }
+    .chartGrid {
+        grid-column: 2 / 3;
+        grid-row: 1;
+        display: flex;
+        padding: 50px 30px 0 0;
+        box-sizing: border-box;
+    }
+
+    .utilityGrid {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+
+        .btnReset {
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: #fff;
+            flex: 0 0 90%;
+        }
+
+        .statusConnectedUser,
+        .votedCount {
+            flex: 1 1 30%;
+            margin: 10px;
+        }
+
+        .statusFrame {
+            flex: 0 0 100%;
+        }
+    }
+}

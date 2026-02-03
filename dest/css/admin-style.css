@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700");
+@import url("normalize.css");
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #F8F8F8;
+}
+
+.mainFrame {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.mainFrame .scoreFrame {
+  flex: 3 1 auto;
+  display: flex;
+}
+.mainFrame .scoreFrame .score {
+  margin: auto;
+  font-size: 100px;
+  font-weight: 700;
+  text-align: center;
+}
+.mainFrame .utilityFrame {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainFrame .utilityFrame .btnReset {
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #fff;
+  flex: 0 0 90%;
+}
+.mainFrame .utilityFrame .statusConnectedUser,
+.mainFrame .utilityFrame .votedCount {
+  flex: 1 1 30%;
+  margin: 10px;
+}
+.mainFrame .utilityFrame .statusFrame {
+  flex: 0 0 100%;
+}
+.mainFrame .statusFrame {
+  height: 180px;
+}
+
+.statusFrame {
+  height: 48px;
+  flex: 0 0 auto;
+}
+.statusFrame > div {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 48px;
+  display: none;
+}
+.statusFrame .statusMsgConnecting {
+  background: #fff6ee;
+  color: #faa05a;
+}
+.statusFrame .statusMsgConnected {
+  background: #edfbf6;
+  color: #32d296;
+}
+.statusFrame .statusMsgDisconnected {
+  background: #fef4f6;
+  color: #f0506e;
+}
+
+.passcode {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  position: fixed;
+}
+.passcode p {
+  display: block;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.passcode .pin {
+  width: 200px;
+  height: 48px;
+  margin: 50px auto;
+  display: block;
+}

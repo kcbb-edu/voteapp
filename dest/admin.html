@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>投票 App - 管理員</title>
+    <link rel="stylesheet" href="css/admin-style.css"/>
+  </head>
+  <body>
+    <div class="mainFrame">
+      <div class="scoreFrame">
+        <div class="score">0.0</div>
+      </div>
+      <div class="utilityFrame">
+        <div class="btnReset">重置</div>
+        <div class="statusConnectedUser">已連線用戶: --</div>
+        <div class="votedCount">已投票人數: --</div>
+        <div class="statusFrame">
+          <div class="statusMsgConnecting">連線中...</div>
+          <div class="statusMsgConnected">已連線</div>
+          <div class="statusMsgDisconnected">已斷線</div>
+        </div>
+      </div>
+    </div>
+    <div class="passcode">
+      <p>管理員</p>
+      <input class="pin" type="password"/>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/countUp.js"></script>
+    <script src="js/admin-script.js"></script>
+  </body>
+</html>

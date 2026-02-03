@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>投票 App - 顯示</title>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+    <div class="mainGrid">
+      <div class="scoreGrid">
+        <div class="score">0.0</div>
+      </div>
+      <div class="chartGrid">
+        <canvas class="chart"></canvas>
+      </div>
+      <div class="utilityGrid">
+        <div class="statusConnectedUser">已連線用戶: --</div>
+        <div class="votedCount">已投票人數: --</div>
+        <div class="statusFrame">
+          <div class="statusMsgConnecting">連線中...</div>
+          <div class="statusMsgConnected">已連線</div>
+          <div class="statusMsgDisconnected">已斷線</div>
+        </div>
+      </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/countUp.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/display-script.js"></script>
+  </body>
+</html>

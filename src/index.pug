@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+html(lang="zh-HK")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title 投票 App - 客戶端
+        link(rel="stylesheet", href="css/style.css")
+    body
+        div.mainFrame
+            .titleFrame
+                h1 評分！
+            .contentFrame
+                .contentWrapper
+                    .scoreBtnWrapper
+                        .scoreBtn(data-score="1") 1
+                        .scoreBtn(data-score="2") 2
+                        .scoreBtn(data-score="3") 3
+                        .scoreBtn(data-score="4") 4
+                        .scoreBtn(data-score="5") 5
+                    .confirmWrapper
+                        .confirmMsg 載入中...
+            .statusFrame
+                .statusMsgConnecting 連線中
+                .statusMsgConnected 已連線到伺服器
+                .statusMsgDisconnected 已斷線
+        script(src="socket.io/socket.io.js")
+        script(src="js/jquery.js")
+        script(src="js/Chart.js")
+        script(src="js/script.js")

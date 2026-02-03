@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>投票 App - 客戶端</title>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+    <div class="mainFrame">
+      <div class="titleFrame">
+        <h1>評分！</h1>
+      </div>
+      <div class="contentFrame">
+        <div class="contentWrapper">
+          <div class="scoreBtnWrapper">
+            <div class="scoreBtn" data-score="1">1</div>
+            <div class="scoreBtn" data-score="2">2</div>
+            <div class="scoreBtn" data-score="3">3</div>
+            <div class="scoreBtn" data-score="4">4</div>
+            <div class="scoreBtn" data-score="5">5</div>
+          </div>
+          <div class="confirmWrapper">
+            <div class="confirmMsg">載入中...</div>
+          </div>
+        </div>
+      </div>
+      <div class="statusFrame">
+        <div class="statusMsgConnecting">連線中</div>
+        <div class="statusMsgConnected">已連線到伺服器</div>
+        <div class="statusMsgDisconnected">已斷線</div>
+      </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
