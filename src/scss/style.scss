@@ -85,16 +85,27 @@ body {
 .confirmWrapper {
     position: absolute;
     top: 0;
-    margin: 5px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    pointer-events: none; /* Let clicks pass through when hidden/transparent if needed, but we fade it out usually */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     .confirmMsg {
-        width: calc(100% - 10px);
-        height: 100px;
-        line-height: 100px;
-        background-color: rgba(0, 0, 0, 0.6);
+        width: 80%;
+        max-width: 300px;
+        height: auto;
+        padding: 20px;
+        line-height: 1.5;
+        background-color: rgba(0, 0, 0, 0.85); /* Darker */
         text-align: center;
         color: white;
         font-weight: 700;
-        border-radius: 5px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 }
 
@@ -106,19 +117,26 @@ body {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
+        max-width: 500px; /* Limit width */
+        margin: 0 auto;
     }
 
     .scoreBtn {
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
+        height: 80px; /* Base height */
+        line-height: 80px;
         margin: 5px;
-        flex: 0 1 auto;
+        // make it responsive
+        flex: 1 0 28%; /* Grow to fill, base ~30% width -> 3 buttons per row on small screens */
+        max-width: 100px; /* Max size */
+        
         text-align: center;
-        font-size: 42px;
+        font-size: 32px; /* Smaller font */
         font-weight: 600;
         color: #FFFFFF;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.20);
+        cursor: pointer;
+        
         &[data-score="1"] {
             background-image: linear-gradient(-135deg, #E0FFFB 0%, #3CD1A9 100%);
             box-shadow: 0 6px 12px 0 rgba(80, 227, 194, 0.20);
