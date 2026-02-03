@@ -26,9 +26,10 @@ function showConfirmMsg(msg, shakeVal) {
     }
     
     if (!msg || msg.trim() === "") {
-        $('.confirmMsg').fadeOut();
+        $('.confirmWrapper').fadeOut();
     } else {
-        $('.confirmMsg').text(msg).fadeIn();
+        $('.confirmMsg').text(msg);
+        $('.confirmWrapper').fadeIn();
     }
 }
 
@@ -137,18 +138,6 @@ socket.on('pushScore', (message) => {
 });
 
 socket.on('reset', (message) => {
-    // On system reset, maybe we should kick users out?
-    // Or just clear message.
-    showConfirmMsg(''); 
-    // Option: Force re-login?
-    // localStorage.removeItem('sessionCode');
-    // showLogin();
-    // But user asked for reset in admin page, usually to clear scores.
-    // If we change code, we should probably force logout.
-    // index.js regenerates code on reset.
-    // So the client's current code is now INVALID.
-    // So logic:
     localStorage.removeItem('sessionCode');
-    showLogin();
-    showConfirmMsg('系統重置 (Reset)', 0);
+    location.reload();
 });
